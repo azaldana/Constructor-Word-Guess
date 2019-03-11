@@ -16,7 +16,8 @@ function Word(word){
             chosenWord += this.letterArray[i] + " ";
         }
 
-        console.log(chosenWord + "\n==================\n");
+        console.log(chosenWord);
+        console.log("\n");
     }
 
     this.userGuess = function(input){
