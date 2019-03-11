@@ -14,7 +14,7 @@ var guessesLeft = 15;
 
 function playGame() {
     if (requireNewWord === true) {
-        computerChoice = Math.floor(Math.random() * wordList.length);
+        computerChoice = wordList[Math.floor(Math.random() * wordList.length)];
         randomWord = new Word(computerChoice);
 
         requireNewWord = false;
@@ -28,7 +28,7 @@ function playGame() {
 
     console.log(completedWord, computerChoice);
 
-    if (completedWord.join('') != computerChoice) {
+    if (completedWord != computerChoice) {
         inquirer.prompt([
             {
                 type: "input",
@@ -47,14 +47,12 @@ function playGame() {
                 playGame();
             } else {
                 var wordCheckArray = [];
-
                 randomWord.userGuess(input.userinput);
-
                 randomWord.letterArray.forEach(wordCheck);
 
-                // console.log(wordCheckArray, completedWord);
+                console.log(wordCheckArray, completedWord);
 
-                if (wordCheckArray.join("") === completedWord.join("")) {
+                if (!computerChoice.includes(input.userinput)) {
                     console.log("\nIncorrect\n");
                     incorrectLetters.push(input.userinput);
                     guessesLeft--;
@@ -84,7 +82,7 @@ function playGame() {
         })
 
     } else {
-        console.log("You Win! \n");
+        console.log("You Win!\n");
         restartGame();
     }
 
