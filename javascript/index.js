@@ -6,8 +6,6 @@ var wordList = ["horse", "dog", "monkey", "rhino", "lizard", "snake", "lion", "c
 
 var computerChoice = wordList[Math.floor(Math.random() * wordList.length)];
 
-// console.log("random index", computerChoice);
-
 var randomWord = new Word(computerChoice);
 var requireNewWord = false;
 var incorrectLetters = [];
@@ -22,10 +20,13 @@ function playGame() {
         requireNewWord = false;
     }
 
+    // if letter is guessed correctly //
     var completedWord = [];
+
+    // separate each letter that is guessed //
     randomWord.letterArray.forEach(completeCheck);
 
-    if (completedWord != computerChoice) {
+    if (completedWord.join('') != computerChoice) {
         inquirer.prompt([
             {
                 type: "input",
@@ -83,7 +84,11 @@ function playGame() {
     }
 
     function completeCheck(key) {
-        completedWord.push(key.guessedLetter);
+        if (key.guessedLetter){
+            completedWord.push(key.letter);
+        } else {
+            completedWord.push(' ');
+        }
     }
 }
 
