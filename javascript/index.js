@@ -26,6 +26,8 @@ function playGame() {
     // separate each letter that is guessed //
     randomWord.letterArray.forEach(completeCheck);
 
+    console.log(completedWord, computerChoice);
+
     if (completedWord.join('') != computerChoice) {
         inquirer.prompt([
             {
@@ -50,6 +52,8 @@ function playGame() {
 
                 randomWord.letterArray.forEach(wordCheck);
 
+                // console.log(wordCheckArray, completedWord);
+
                 if (wordCheckArray.join("") === completedWord.join("")) {
                     console.log("\nIncorrect\n");
                     incorrectLetters.push(input.userinput);
@@ -67,7 +71,8 @@ function playGame() {
                 if (guessesLeft > 0) {
                     playGame();
                 } else {
-                    console.log("Sorry you've lost");
+                    console.log("Sorry You've Lost.");
+                    console.log("The correct answer was " + computerChoice + ".\n");
                     restartGame();
                 }
 
@@ -84,15 +89,14 @@ function playGame() {
     }
 
     function completeCheck(key) {
-        if (key.guessedLetter){
-            completedWord.push(key.letter);
-        } else {
-            completedWord.push(' ');
-        }
+        completedWord.push(key.guessedLetter);
+        // if (key.guessedLetter){
+        //     completedWord.push(key.letter);
+        // } else {
+        //     completedWord.push(' ');
+        // }
     }
 }
-
-playGame();
 
 function restartGame() {
     inquirer.prompt([
@@ -114,6 +118,9 @@ function restartGame() {
         }
     })
 }
+
+playGame();
+
 
 
 
